@@ -38,8 +38,8 @@ Books
                 {% for book in books %}
                 <tr>
                     <td class="text-center p-4">{{forloop.counter}}</td>
-                    <td class="text-center">{% if book.pic %}<img style="height:50px" class="rounded-circle"
-                            src="{{book.pic.url}}" alt="">{% endif %} </td>
+                    <td class="text-center"><img style="height:50px" class="rounded-circle"
+                            src="{% if book.pic %}{{book.pic.url}} {% else %}https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80{% endif %}" alt=""> </td>
 
                     <td class="text-center p-4">{% if book.title %}{{book.title}}{% endif %}</td>
                     <td class="text-center p-4">{% if book.author %}{{book.author}}{% endif %}</td>

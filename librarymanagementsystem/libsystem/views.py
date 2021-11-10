@@ -222,7 +222,7 @@ class UpdateProfileView(View):
             return redirect('/profile')
 
         except:
-            return render(request,'updateprofile.html',{'messaged':"Something wend wrong..."})
+            return render(request,'updateprofile.html',{'messaged':"Email already excisted..."})
 
 
 class ChangePasswordView(View):
@@ -287,7 +287,7 @@ class UpdateUserView(View):
             return redirect('/users')
 
         except:
-            return render(request,'update-user.html',{'messaged':"Something wend wrong..."})
+            return render(request,'update-user.html',{'messaged':"Email already excisted..."})
 
 
 class DeleteUserView(View):
@@ -298,7 +298,7 @@ class DeleteUserView(View):
 
 import csv, io
 from django.contrib import messages
-def profile_upload(request):
+def upload_csv(request):
 
     try:
         # declaring template

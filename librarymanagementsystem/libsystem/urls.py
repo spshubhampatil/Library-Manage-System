@@ -21,5 +21,5 @@ urlpatterns = [
     path('users', UsersView.as_view(), name="users"),
     path('update-user/<int:user_id>', UpdateUserView.as_view(), name="update-user"),
     path('delete-user/<int:user_id>',DeleteUserView.as_view(), name="delete-user"),
-    path('upload-csv/', profile_upload, name="profile_upload"),
+    path('upload-csv/', upload_csv, name="upload_csv"),
 ]
