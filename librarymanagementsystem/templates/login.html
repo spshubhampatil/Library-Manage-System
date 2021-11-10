@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock %}
+{% block body %}
+
+<div class="ui active dimmer" id="loading" hidden>
+    <div class="ui massive text loader">Loading</div>
+</div>
+
+<div class="container p-3" style="height:100%">
+    <div class="col-lg-5 col-md-8 mx-auto ui segment p-4">
+        <p class="display-6 text-center border p-2">LogIn</p>
+        <hr>
+                    <div class="alert alert-danger mt-2" id="messaged" {% if not messaged %}hidden{% endif %}>
+   								 {{messaged}}
+    							</div> 
+
+    							<div class="alert alert-success mt-2" id="messages" {% if not messages %}hidden{% endif %}>
+     							{{messages}}
+   								 </div>
+
+        <form class="ui form"  action="/login" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <label>Email</label>
+                <input type="text" name="email" placeholder="Email">
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password">
+            </div>
+            {% comment %} <div class="mb-2">
+                <a href="/reset-password" class="">Reset Password</a>
+            </div> {% endcomment %}
+            <div>
+                <button class="ui button teal" id="sbutton" type="submit">Login</button>
+                <a href="/signup" class="mt-2 float-right">Don't have an account?</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+{% if thank %}
+alert('Account created successfully, You can login with your email and password...');
+document.location = "/login";
+{% endif %}
+</script>
+{% endblock %}

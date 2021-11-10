@@ -1,0 +1,42 @@
+	{% extends 'base.html' %}
+{% block title %}
+Update User
+{% endblock %}
+{% block body %}
+
+
+
+<div class="container p-3" style="height:100%">
+    <div class="col-lg-5 col-md-8 mx-auto ui segment p-4">
+        <p class="display-6 text-center border p-2">Update User</p>
+        <hr>
+
+            <div class="alert alert-danger mt-2" id="messaged" {% if not messaged %}hidden{% endif %}>
+   								 {{messaged}}
+    							</div> 
+
+    							<div class="alert alert-success mt-2" id="messages" {% if not messages %}hidden{% endif %}>
+     							{{messages}}
+   								 </div>
+
+        <form class="ui form" action="/update-user/{{user.id}}" method="POST" style="height:100%">
+            {% csrf_token %}
+
+            <div class="field">
+                <label>Name</label>
+                <input type="text" name="name" value="{{user.profile_name}}" placeholder="Name" required>
+            </div>            
+            
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" value="{{user.email}}" placeholder="Email" required>
+            </div>           
+            
+
+            <button class="ui button"  type="submit">Submit</button>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

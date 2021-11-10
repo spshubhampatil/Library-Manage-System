@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Profile
+{% endblock %}
+
+{% block body %}
+<div class="container p-3" style="height:100%">
+    <div class="card mx-auto ui segment p-4" style="width: 80rem;">
+        <p class="display-6 text-center border p-2">Update Profile</p>
+                                <div class="alert alert-danger mt-2" id="messaged" {% if not messaged %}hidden{% endif %}>
+   								 {{messaged}}
+    							</div> 
+
+    							<div class="alert alert-success mt-2" id="messages" {% if not messages %}hidden{% endif %}>
+     							{{messages}}
+   								</div>
+
+        <div class="row border m-1">
+            <div class="col-6 m-0 p-0" style="float-center">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-right">Name &nbsp; : </li>
+                   
+                    <li class="list-group-item text-right">Email &nbsp; : </li>
+                </ul>
+            </div>
+            <form action="/updateprofile" method="POST">
+                {% csrf_token %}
+                <div class="col-12 m-0 p-0" style="float-center">
+                    <ul class="list-group list-group-flush">
+
+                        <input type="text" name="name" class="form-control m-1" null="true" value="{{user.profile_name}}" placeholder="{{user.profile_name}}">
+                        
+                        <input type="text" name="email" class="form-control m-1" null="true" value="{{user.email}}" placeholder="{{user.email}}">
+                        
+                    </ul>
+                </div>
+                <button class="ui button teal m-2" id="sbutton" type="submit">Update</button>
+                <a class="ui button mx-1 mt-2" href="/profile" >Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

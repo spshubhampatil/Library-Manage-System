@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}
+Users
+{% endblock %}
+{% block body %}
+
+<div class="container p-4" style="height:100%">
+    <h4 class="display-8">Users</h4>
+    
+    <hr>
+    <div class="border p-4 m-4 rounded">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">Sno.</th>
+                    <th class="text-center">User</th>                    
+                    <th class="text-center">User Type</th>
+                    <th class="text-center">Email</th>
+                     {% if request.user.is_authenticated %}
+                        {% if request.user.is_admin %}
+                    <th class="text-center">Action</th>
+                    {% endif %}
+                        {% endif %}
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td class="text-center p-4">{{forloop.counter}}</td>
+                    <td class="text-center">{% if user.profile_name %}{{user.profile_name}}{% endif %} </td>
+                    <td class="text-center p-4">{% if user.is_admin %}Admin {% else %}Student{% endif %}</td>
+                    <td class="text-center p-4">{% if user.email %}{{user.email}}{% endif %}</td>
+                    {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+                    <td class="text-center p-4"><a class="btn btn-success" href="/update-user/{{user.id}}">Update</a> | <a class="btn btn-danger" href="/delete-user/{{user.id}}">Delete</a></td>
+                                    {% endif %}
+                {% endif %}
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

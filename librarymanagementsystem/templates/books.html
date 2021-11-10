@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}
+Books
+{% endblock %}
+{% block body %}
+
+<div class="container p-4" >
+ {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+    <a class="btn btn-success ml-2" style="float:right" href="/add-books">Add Book</a>
+    
+    <a class="btn btn-success " style="float:right" href="/upload-csv">Upload CSV <i class="fas fa-upload"></i></a>
+                
+                    {% endif %}
+                {% endif %}
+    <h4 class="display-8">Books</h4>
+   
+
+    <hr>
+    <div class="border p-4 m-4 rounded">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center">Sno.</th>
+                    <th class="text-center">Book</th>
+                    <th class="text-center">Book Name</th>
+                    <th class="text-center">Auther</th>
+                    <th class="text-center">ISBN</th>
+                    {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+                    <th class="text-center">Action</th>
+                                    {% endif %}
+                    {% endif %}
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td class="text-center p-4">{{forloop.counter}}</td>
+                    <td class="text-center">{% if book.pic %}<img style="height:50px" class="rounded-circle"
+                            src="{{book.pic.url}}" alt="">{% endif %} </td>
+
+                    <td class="text-center p-4">{% if book.title %}{{book.title}}{% endif %}</td>
+                    <td class="text-center p-4">{% if book.author %}{{book.author}}{% endif %}</td>
+                    <td class="text-center p-4">{% if book.isbn %}{{book.isbn}}{% endif %}</td>
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_admin %}
+                    <td class="text-center p-4"><a class="btn btn-success" href="/update-book/{{book.id}}">Update</a> | <a class="btn btn-danger" href="/delete-book/{{book.id}}">Delete</a></td>
+                        {% endif %}
+                        {% endif %}
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

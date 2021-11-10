@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Library Management System
+{% endblock %}
+
+{% block body %}
+
+<div class="container mx-auto p-3">
+   <div class="row">      
+
+      <div class="col-lg-12 mx-auto">
+         <div class="row">
+
+               <div class="card text-center m-3">
+                 <div class="card-header">
+                   Books
+                 </div>
+                 <div class="card-body">
+                   <h5 class="card-title">Total Books</h5>
+                   <p class="card-text">{{books_count}}</p>
+                   <a href="/books" class="btn btn-primary">Go</a>
+                 </div>
+
+               </div>
+
+               <div class="card text-center m-3">
+                 <div class="card-header">
+                   Users
+                 </div>
+                 <div class="card-body">
+                   <h5 class="card-title">Total Users</h5>
+                   <p class="card-text">{{users_count}}</p>
+                   {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+                   <a href="/users" class="btn btn-primary">Go</a>
+                   {% endif %}
+                   {% endif %}
+                 </div>
+                 
+               </div>
+
+         </div>        
+
+
+
+         <div class="row">
+            {% for book in books %}
+            <div class="card m-3" style="width: 18rem;">
+            
+              <img class="card-img-top" width="500" height="200"  src="{% if book.pic %}{{book.pic.url}} {% else %}https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8OXx8fGVufDB8fHx8&w=1000&q=80{% endif %}"   alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <p class="card-text">{{book.summary}}</p>
+                {% if request.user.is_authenticated %}
+                {% if request.user.is_admin %}
+                <a href="/update-book/{{book.id}}" class="btn btn-primary">Update</a>  
+                <a class="btn btn-danger" href="/delete-book/{{book.id}}" style="float: right;">Delete</a>
+                {% endif %}
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+
+         </div>                 
+
+      </div>
+   </div>
+</div>
+
+{% endblock %}

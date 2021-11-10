@@ -1,0 +1,66 @@
+	{% extends 'base.html' %}
+{% block title %}
+SignUp
+{% endblock %}
+{% block body %}
+
+
+
+<div class="container p-3" style="height:100%">
+    <div class="col-lg-5 col-md-8 mx-auto ui segment p-4">
+        <p class="display-6 text-center border p-2">SignUp</p>
+        <hr>
+
+            <div class="alert alert-danger mt-2" id="messaged" {% if not messaged %}hidden{% endif %}>
+   								 {{messaged}}
+    							</div> 
+
+    							<div class="alert alert-success mt-2" id="messages" {% if not messages %}hidden{% endif %}>
+     							{{messages}}
+   								 </div>
+
+        <form class="ui form" action="/signup" method="POST" style="height:100%">
+            {% csrf_token %}
+
+            <div class="field">
+                <label>First Name</label>
+                <input type="text" name="fname" placeholder="First Name" required>
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input type="text" name="lname" placeholder="Last Name" required>
+            </div>
+
+            <div class="field">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="usertype" id="inlineRadio1" value="admin" required>
+                <label class="form-check-label" for="inlineRadio1">Admin</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="usertype" id="inlineRadio2" value="student"  required>
+                <label class="form-check-label" for="inlineRadio2">Student</label>
+              </div>
+            </div>
+
+            
+            <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="field">
+                <label>Re-Enter Password</label>
+                <input type="password" name="repassword" placeholder="Re-Password" required>
+            </div>
+            
+
+            <button class="ui button"  type="submit">Submit</button>
+            
+        </form>
+    </div>
+</div>
+
+{% endblock %}

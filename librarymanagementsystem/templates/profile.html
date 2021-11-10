@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+{% block body %}
+
+<div class="container p-3" style="height:100%">
+   <div class="card mx-auto ui segment p-4" style="width: 80rem;">
+      <p class="display-6 text-center p-2 m-auto">Profile</p>
+      <div class="ui success message" {% if not message %}hidden{% endif %}>
+         {{message}}
+      </div>
+      <div class="container border " style="text-align:center">
+         {% load static %}
+         <img src="{% static 'shop/usericon/usericon.png' %}" style="width:100px;height:100px" alt="">
+         <div class="row border m-3">
+            <div class="col-6 m-0 p-0" style="float-center">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-right">Name &nbsp; : </li>
+                  
+                  <li class="list-group-item text-right">Email &nbsp; : </li>
+               </ul>
+            </div>
+            <div class="col-6 m-0 p-0" style="float-center">
+               <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-left"> {{user.profile_name}}</li>
+                  
+                  <li class="list-group-item text-left"> {{user.email}}</li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="card-body">
+      <a href="/updateprofile"  class="ui button teal">Update Profile</a>
+   <a href="/changepassword"  class="ui button teal float-right">Change Password</a>
+      </div>
+      
+      
+   </div>
+</div>
+
+{% endblock %}
